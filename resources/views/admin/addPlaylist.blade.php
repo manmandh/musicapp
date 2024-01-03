@@ -1,7 +1,6 @@
-
-
 @extends('layouts/main')
 @section('ContentWarpper')
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -19,41 +18,31 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
+
     <section class="content">
       <div class="container-fluid">
         <h2>Tạo một Playlist của bạn lên FunTune</h2>
         {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 
-        <form id="uploadForm" action="{{route('storeSong')}}" method="POST" enctype="multipart/form-data">
+        <form id="uploadForm" action="{{route('storePlaylist')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                        <label for="">Tên bài hát</label>
-                        <input type="text" name="nameSong" class="form-control">
+                        <label for="">Tên Playlist</label>
+                        <input type="text" name="title" class="form-control">
                 </div>
                 
                 <div class="form-group">
                         <label for="">Mô tả</label>
                         <input type="text" name="description" class="form-control">
                 </div>
-                <div class="mt-3 search-container" >
-                        <label for="">Ca sĩ</label>
-                        <input id="search-input" type="search" name="artist" class="form-control " id="" >
-                        <div id="search-results" class="border " ></div>
-                        <h2>Danh sách nghệ sĩ</h2>
-                        <div id="listAritst" >
 
-                        </div>
-                </div>
-                <label for=""></label>
                 <div>
-                        <label for="">Thể loại</label>
-                        <select name="genre" id="" class="form-select mt-3">
-                                {{-- @dd($genres) --}}
-                                @foreach ($genres as $genre)
-                                <option value="">{{$genre->title}}</option>  
+                        <label for="">Bài hát </label> <br>
+                        <select name="genre" id="" class="form-select mt-3 p-2 col-10">
+                                {{-- @dd($songs) --}}
+                                @foreach ( $songs as  $song)
+                                <option value="">{{ $song->title}}</option>  
                                 @endforeach
                                
                         

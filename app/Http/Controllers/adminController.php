@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\genre;
+use App\Models\playlist;
 use App\Models\song;
+use App\Models\song_playlist;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -73,5 +75,46 @@ class adminController extends Controller
             'genres'=>$genres
 
         ]);
+    }
+
+    public function managePlaylistView(){
+        $playlist = playlist::all();
+        return view ('admin.managePlaylist', [
+            "playlists" => $playlist,
+            "countPlaylist" => playlist::count(),
+        ]);
+    }
+
+    public function manageAddPlaylistView(){
+        $playlists = playlist::all();
+        $songs = song::all();
+        return view ('admin.addPlaylist', [
+            'playlists' => $playlists,
+            'songs'=> $songs
+        ]);
+    }
+
+    public function storePlaylist(Request $request){
+        $formField= $request->validate([
+            'title'=>'required|string|max:255',
+            'user_id'=>'nullable|string',
+            'description'=>'nullable|string',
+            'playlist_img'=>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+        
+
+        $playlist_img='';
+    
+        if($request->hasFile('playlist_img')){
+            $playlist_img=$request->file('playlist_img')->store('avatars','public');
+        }
+
+        $playlist= playlist::create([
+            'title' => $formField['title'],
+            'user_id' => $formField['user_id'],
+            'description' => $formField['description'],
+            'playlist_img' =>$playlist_img
+        ]);
+       return redirect()->route('admin.managePlaylist');
     }
 }

@@ -24,5 +24,7 @@ class playlist extends Model
     {
         return $this->hasMany(song_playlist::class);
     }
+
+
  
 }
