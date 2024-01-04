@@ -25,7 +25,7 @@
         <h2>Tạo một Playlist của bạn lên FunTune</h2>
         {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 
-        <form id="uploadForm" action="{{route('storePlaylist')}}" method="POST" enctype="multipart/form-data">
+        <form id="uploadForm" action="{{route('admin.storePlaylist')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                         <label for="">Tên Playlist</label>
@@ -39,7 +39,7 @@
 
                 <div>
                         <label for="">Bài hát </label> <br>
-                        <select name="genre" id="" class="form-select mt-3 p-2 col-10">
+                        <select name="playlist_song " id="" class="form-select mt-3 p-2 col-10">
                                 {{-- @dd($songs) --}}
                                 @foreach ( $songs as  $song)
                                 <option value="">{{ $song->title}}</option>  
@@ -48,6 +48,8 @@
                         
                         </select>
                 </div>
+
+                <div><input type="hidden" name="user_id" value="1"></div>
                 <div class="mb-3"></div>
                 <input type="file" name="music_file" id="inputFile" class="d-none">
                 <div class="btn btn-secondary" onclick="clickFile()">Thêm tệp</div>

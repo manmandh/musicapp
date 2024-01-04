@@ -86,13 +86,13 @@
                <td>{{$playlist->description}}</td>
              
                <td class="d-flex">
-                   <button href="" class="btn btn-secondary">Sửa
+                   <a href="{{route('admin.editPlaylist', ['playlist_id' => $playlist->id])}}" class="btn btn-secondary">Sửa
                        <i class="fas fa-edit"></i>
-                   </button>
+                   </a>
                   
                        
                       
-                     <form id="" action="songs/2" method="post">
+                   <form action="{{route('admin.manageDeletePlaylist',['playlist'=>$playlist->id])}}" method="post">
                          @csrf
                          @method('delete')
                          <button class="btn btn-primary" type="submit">Xóa

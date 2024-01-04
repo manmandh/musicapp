@@ -65,6 +65,8 @@ Route::middleware(['admin'])->group(function () {
         Route::get('manage/addPlaylist',[adminController::class,'manageAddPlaylistView'])->name('admin.addPlaylist');
         Route::post('manage/addPlaylist/add',[adminController::class,'storePlaylist'])->name('admin.storePlaylist');
         Route::delete('manage/Playlist/{playlist}',[adminController::class,'destroyPlaylist'])->name('admin.manageDeletePlaylist');
+        Route::get('/manage/playlist/{playlist_id}', [adminController::class, 'editView'])->name('admin.editPlaylist');
+        Route::put('/manage/playlist/{playlist_id}', [adminController::class, 'edit'])->name('updatePlaylist');
     });
 });
 Auth::routes();
